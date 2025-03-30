@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  salt-master:
+    image: saltstack/salt:latest
+    platform: linux/amd64 
+    container_name: salt-master
+    command: salt-master
+    ports:
+      - "4505:4505"
+      - "4506:4506"
+    volumes:
+      - ./salt:/srv/salt          # Mount Salt state tree
+      - salt_master_config:/etc/salt
+    networks:
+      - salt-net
+
+  salt-minion:
+    image: saltstack/salt:latest
+    platform: linux/amd64 
+    container_name: salt-minion
+    command: salt-minion
+    environment:
+      - SALT_MASTER=salt-master
+    depends_on:
+      - salt-master
+    volumes:
+      - ./salt:/srv/salt
+      - salt_minion_config:/etc/salt
+    networks:
+      - salt-net
+
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    ports:
+      - "8081:8081"
+    environment:
+      - INSTALL4J_ADD_VM_PARAMS=-Dnexus.security.randompassword=false
+    volumes:
+      - nexus_data:/nexus_data
+    networks:
+      - salt-net        # ✅ now a valid list
+
+volumes:
+  salt_master_config:
+  salt_minion_config:
+  nexus_data:
+
+networks:
+  salt-net:
+    driver: bridge

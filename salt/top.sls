@@ -1,0 +1,3 @@
+base:
+  '*':
+    - infra_status
