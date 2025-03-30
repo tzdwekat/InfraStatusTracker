@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+        stage('Check Workspace') {
+            steps {
+                sh 'ls -l'
+                sh 'pwd'
+            }
+        }
+
         stage('Run InfraStatusTracker') {
             steps {
                 sh 'python3 main.py'
