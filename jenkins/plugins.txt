@@ -4,3 +4,7 @@ docker-commons
 docker-java-api
 workflow-aggregator
 pipeline-stage-view
+workflow-durable-task-step
+pipeline-model-definition
+credentials
+git
