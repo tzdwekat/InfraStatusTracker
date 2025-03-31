@@ -11,7 +11,6 @@ COPY basic-security.groovy /usr/share/jenkins/ref/init.groovy.d/basic-security.g
 # Add Jenkins user to Docker group
 RUN groupadd -g 998 docker || true && usermod -aG docker jenkins
 
-USER jenkins
 
 # Copy plugins.txt and install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
