@@ -7,18 +7,16 @@ pipeline {
 
     stages {
         stage('Verify Python') {
-        steps {
-            sh 'python --version'
-        }
-        }
-        stage('Run InfraStatusTracker in Python Docker') {
             steps {
-                script {
-                    docker.image('python:3.10').inside {
-                        sh 'pip install requests' // Optional if you use it
-                        sh 'python3 salt/infra_status/files/main.py'
-                    }
-                }
+                sh 'python --version'
+            }
+        }
+        stage('Run InfraStatusTracker') {
+            steps {
+                sh '''
+                echo "Running main.py..."
+                python salt/infra_status/files/main.py
+                '''
             }
         }
     }
@@ -26,7 +24,6 @@ pipeline {
     post {
         always {
             script {
-                // Run curl from Jenkins host (not inside container)
                 if (fileExists('salt/infra_status/files/status.log')) {
                     sh '''
                     curl -v -u admin:admin123 \
