@@ -6,7 +6,7 @@
 
 /opt/infrastatus/main.py:
   file.managed:
-    - source: salt://infra_status/files/main.py
+    - source: salt://infra_status/main.py
     - user: root
     - group: root
     - mode: 755
