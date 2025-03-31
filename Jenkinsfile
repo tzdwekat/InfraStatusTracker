@@ -6,6 +6,11 @@ pipeline {
     }
 
     stages {
+        stage('Verify Python') {
+        steps {
+            sh 'python --version'
+        }
+        }
         stage('Run InfraStatusTracker in Python Docker') {
             steps {
                 script {
