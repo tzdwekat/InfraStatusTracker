@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  jenkins:
+    build:
+      context: ./jenkins
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # 🔥 Gives Jenkins access to Docker daemon
+    networks:
+      - salt-net
+
   salt-master:
     image: saltstack/salt:latest
     platform: linux/amd64 
@@ -46,7 +59,8 @@ volumes:
   salt_master_config:
   salt_minion_config:
   nexus_data:
-
+  jenkins_home:
+  
 networks:
   salt-net:
     driver: bridge
