@@ -1,0 +1,6 @@
+docker-plugin
+docker-workflow
+docker-commons
+docker-java-api
+workflow-aggregator
+pipeline-stage-view
