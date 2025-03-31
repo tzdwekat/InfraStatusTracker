@@ -39,7 +39,7 @@ services:
       - salt-master
     volumes:
       - ./salt:/srv/salt
-      - ./salt/minion:/etc/salt/minion 
+      - ./salt/minion:/etc/salt/minion:ro
     networks:
       - salt-net
 
