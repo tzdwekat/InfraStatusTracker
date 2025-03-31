@@ -24,7 +24,7 @@ services:
       - "4506:4506"
     volumes:
       - ./salt:/srv/salt          # Mount Salt state tree
-      - salt_master_config:/etc/salt
+      - ./salt/master:/etc/salt/master:ro
     networks:
       - salt-net
 
