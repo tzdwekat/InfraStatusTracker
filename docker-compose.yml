@@ -39,7 +39,7 @@ services:
       - salt-master
     volumes:
       - ./salt:/srv/salt
-      - salt_minion_config:/etc/salt
+      - ./salt/minion:/etc/salt/minion 
     networks:
       - salt-net
 
@@ -60,7 +60,7 @@ volumes:
   salt_minion_config:
   nexus_data:
   jenkins_home:
-  
+
 networks:
   salt-net:
     driver: bridge
