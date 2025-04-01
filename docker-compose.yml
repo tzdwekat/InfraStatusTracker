@@ -52,6 +52,7 @@ services:
       - INSTALL4J_ADD_VM_PARAMS=-Dnexus.security.randompassword=false
     volumes:
       - nexus_data:/nexus_data
+      - ./nexus.properties:/nexus-data/etc/nexus.properties
     networks:
       - salt-net        # ✅ now a valid list
   
