@@ -54,6 +54,16 @@ services:
       - nexus_data:/nexus_data
     networks:
       - salt-net        # ✅ now a valid list
+  
+  init-scripts:
+    image: appropriate/curl
+    platform: linux/amd64
+    depends_on:
+      - nexus
+      - jenkins
+    entrypoint: ["/bin/sh", "-c", "sh /scripts/nexus-init.sh && sh /scripts/jenkins-init.sh"]
+    volumes:
+      - ./scripts:/scripts
 
 volumes:
   salt_master_config:
